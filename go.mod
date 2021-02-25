@@ -1,4 +1,4 @@
-module github.com/kenshaw/motionserver
+module github.com/qurious-pixel/motionserver
 
 go 1.14
 

@@ -41,6 +41,7 @@ const (
 	dualShock4_v1 = 1476
 	dualShock4_v2 = 2508
 	dualShock3    = 616
+	dualSense     = 3302
 
 	protocolVer = 1001
 	maxSlots    = 4
@@ -212,6 +213,9 @@ func openDev(filename string) *dev {
 	id := d.ID()
 	// check if it is either a dualshock4 or dualShock3 motion device
 	if id.Vendor == sonyCorp && strings.Contains(strings.ToLower(d.Name()), "motion") {
+		if id.Product == dualSense {
+			pad = 5
+		}
 		if id.Product == dualShock4_v1 || id.Product == dualShock4_v2 {
 			pad = 4
 		}
@@ -226,7 +230,7 @@ func openDev(filename string) *dev {
 	}
 
 	// check all expected axes are present for dualShock4
-	if pad == 4 {
+	if pad == 4 || if pad == 5 {
 		axes := d.AbsoluteTypes()
 		for _, a := range []evdev.AbsoluteType{
 			evdev.AbsoluteX, evdev.AbsoluteY, evdev.AbsoluteZ,
@@ -292,6 +296,9 @@ func findSlot(d *dev) *Slot {
 	mod := ModelDS4
 	if d.ID().Product == dualShock3 {
 		mod = ModelDS3
+	}
+	if d.ID().Product == dualSense {
+		mod = ModelDS5
 	}
 
 	if sl == nil {
