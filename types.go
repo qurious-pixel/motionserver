@@ -26,7 +26,8 @@ const (
 	ModelNone    Model = 0
 	ModelDS3     Model = 1
 	ModelDS4     Model = 2
-	ModelGeneric Model = 3
+	ModelDS5     Model = 3
+	ModelGeneric Model = 4
 )
 
 type BatteryStatus = uint8
