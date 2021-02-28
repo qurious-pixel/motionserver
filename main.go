@@ -230,7 +230,7 @@ func openDev(filename string) *dev {
 	}
 
 	// check all expected axes are present for dualShock4
-	if pad == 4 || if pad == 5 {
+	if pad == 4 || pad == 5 {
 		axes := d.AbsoluteTypes()
 		for _, a := range []evdev.AbsoluteType{
 			evdev.AbsoluteX, evdev.AbsoluteY, evdev.AbsoluteZ,
